@@ -2,8 +2,8 @@ import PySimpleGUI as sg
 sg.theme('Dark gray 8')
 def Bv():
     # Tela de Bem-Vindo
-    layout = [  [sg.Text("clique em 'Começa' para começar experiencia ou clique em 'Login' para fazer cadastro")],
-                [sg.Button('Começa'), sg.Button('Quero ser membro')] ]
+    layout = [  [sg.Text("clique em 'Começa' para começar experiencia ou clique em 'Ser membro' para fazer cadastro")],
+                [sg.Button('Começa'), sg.Button('Ser membro')] ]
 
         # Criador de janela
     window = sg.Window('Bem-Vindo!', layout)
@@ -15,35 +15,29 @@ def Bv():
             # condição para o usuario fechar o programa
         if event == sg.WIN_CLOSED:
             break
-        if event == 'Quero ser membro':
+        if event == 'Ser membro':
             window.close()
             Membro()
         elif event == 'Começa':
             window.close()
-            Nota()
+            Login()
     window.close()
 
 def Membro():
-    layout = [  [sg.Text("Clique em cadastre-se para ser um novo membro")],
-                [sg.Text('Ja é membro? Clique em login')],
-                [sg.Button('Login'), sg.Button('Cadastre-se')] ]
+    layout = [  [sg.Text("Faça seu cadastro para ser membro!")],
+                [sg.Button('Cadastre-se')] ]
 
-        # Criador de janela
     window = sg.Window('Seja Membro!!', layout)
 
         
     while True:
         event, values = window.read()
 
-            # condição para o usuario fechar o programa
         if event == sg.WIN_CLOSED:
             break
         if event == 'Cadastre-se':
             window.close()
             Cadastro()
-        elif event == 'Login':
-            window.close()
-            Login()
     window.close()
 
 def Login():
@@ -72,7 +66,17 @@ def Login():
                 sg.popup('Erro: Nome não é valido')
             elif not chave.isdigit():
                 sg.popup('Erro: Sua senha so pode ser numerica')
-        else:
+            else:
+                with open('Dados_login.txt',"r") as files:
+                    for i in files:
+                        nemo, passe = i.strip().split(',')
+                        if nemo == nombre and passe == chave:
+                            sg.popup('validado com sucerro')
+                            window.close()
+                            Nota()
+                        else:
+                            sg.popup('Erro: ususario não existe')
+                        
             window.close()
             Bv()
     window.close()
@@ -103,10 +107,13 @@ def Cadastro():
              window.close()
              Bv()
         if event == 'Cadatrar-se':
+
             name= values['name']
             gmail=values['gmail']
             CPF=values['CPF']
             Senha=values['Senha']
+           
+             
             if name.isdigit ():
                 sg.popup ('Erro: Seu nome é numerico')   
                 erros=1
@@ -122,18 +129,23 @@ def Cadastro():
             elif not CPF.isdigit():
                 sg.popup('Erro: CPF invalido')
                 erros=1
-            elif not Senha.isdigit():
-                sg.popup('Erro: Sua senha so pode ser numerica')
+            elif len(Senha) < 8:
+                sg.popup('Erro: Sua senha é muito curta!')
                 erros=1
-        else:
-            window['name'].update(f'')
-            window['gmail'].update(f'')
-            window['CPF'].update(f'')
-            window['Senha'].update(f'')
-            sg.popup('cadastro salvo')
-            
+            else:
+                window['name'].update(f'')
+                window['gmail'].update(f'')
+                window['CPF'].update(f'')
+                window['Senha'].update(f'')
+                erros = ''
+            if erros == '':
+                sg.popup('cadastro salvo')
+                with open('dados_login.txt', 'a') as files:
+                    files.write(f"{name},{Senha}\n")
+                window.close()
+                Login()
 
-        window.close()
+    window.close()
 
 def Nota():
     aproveitamento = ''
