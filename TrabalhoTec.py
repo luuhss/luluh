@@ -61,7 +61,7 @@ def Login():
 
         if event == sg.WIN_CLOSED:
             break
-        if event == 'Entrar':
+        if event == "Entrar":
             nombre = values ['nombre'] 
             chave= values ['chave']
             if nombre.isdigit():
