@@ -40,7 +40,7 @@ def Membro():
             Cadastro()
     window.close()
 
-def Login():
+def Login():              
     layout = [  [sg.Text('Nome do usuario: ')],
                 [sg.InputText(key='nombre')],
                 [sg.Text('Digite sua senha: ')],
@@ -123,7 +123,7 @@ def Cadastro():
             elif len(name) <= 3:
                 sg.popup('Erro: Nome não é valido')
                 erros=1
-            elif gmail != '@':
+            elif gmail.isdigit():
                 sg.popup('Erro: Gmail invalido')
                 erros=1
             elif not CPF.isdigit():
