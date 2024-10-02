@@ -5,7 +5,7 @@ def Matiz ():
         [7,8,9]
     ]
     soma_total = 0
-    
+    matriz[0][0] = 10
     for i in range      (3):
         print('')
         for a in range(3):
