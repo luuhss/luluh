@@ -11,7 +11,7 @@ for a in range(4):
 print('-- Matriz --')
 for i in matriz:
     for elemento in i:
-        print(f'{elemento}  ', end= '')
+        print(f'{elem  
     print('')
 print()
 
