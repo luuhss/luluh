@@ -302,6 +302,19 @@
         padding: 1rem;
         margin-top: auto;
     }
+
+    .container_jogos{
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr ;
+    }
+
+    .grid-item{
+        width: 82px;
+        height: 90px;
+        border-radius: 8px;
+    }
 }
 
 
