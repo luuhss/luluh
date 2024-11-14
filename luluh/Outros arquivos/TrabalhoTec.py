@@ -234,4 +234,4 @@ def Nota():
             print(texto)        
     window.close()
 
-Bv()       
+Bv()   
