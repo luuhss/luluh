@@ -33,11 +33,4 @@
     nav ul li {
         margin: 0 1rem;
     }
-    
-    nav ul li a {
-        color: white;
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        display: block;
-    }
 }
